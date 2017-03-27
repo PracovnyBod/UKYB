@@ -7,11 +7,17 @@ import matplotlib.gridspec as gridspec
 ###############################################################################
 mpl.rcParams['figure.dpi'] = 100
 
+<<<<<<< HEAD
 mpl.rcParams['font.family'] = 'Times New Roman'
 mpl.rcParams['mathtext.fontset'] = 'stix'
 
 
 mpl.rcParams['font.size'] = 12
+=======
+mpl.rcParams['font.family'] = 'Arial'
+
+mpl.rcParams['font.size'] = 10
+>>>>>>> 7b7fd5c7bbddaab9de20d90e0e6ee43cf8d46e55
 
 mpl.rcParams['xtick.direction'] = 'out'
 mpl.rcParams['xtick.labelsize'] = mpl.rcParams['font.size']
