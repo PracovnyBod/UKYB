@@ -33,3 +33,7 @@ Pre spúšťanie jupyter notebookov umietnených v GitHub repozitári, ako je te
 ### nbviewer
 
 Len pre zobrazenie (úplné renderovanie) notebookov je možné použiť https://nbviewer.jupyter.org/
+
+##
+
+![instalogo](https://github.com/PracovnyBod/UKYB/blob/master/misc/instalogo.png) [@pracovnybod](https://www.instagram.com/pracovnybod/)
