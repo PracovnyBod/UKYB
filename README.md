@@ -36,4 +36,4 @@ Len pre zobrazenie (úplné renderovanie) notebookov je možné použiť https:/
 
 ##
 
-![instalogo](https://github.com/PracovnyBod/UKYB/blob/master/misc/instalogo.png) [@pracovnybod](https://www.instagram.com/pracovnybod/)
+![instalogo](/misc/instalogo.png) [@pracovnybod](https://www.instagram.com/pracovnybod/)
