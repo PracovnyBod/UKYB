@@ -38,7 +38,9 @@ mpl.rcParams['legend.numpoints'] = 1
 ###############################################################################
 
 def fcnDefaultAxisStyle(ax):
-    ax.grid(color='#cccccc', alpha=1.0, linewidth=0.33, linestyle=':', dashes=[15,4])
+    # ax.grid(color='#cccccc', alpha=1.0, linewidth=0.33, linestyle=':', dashes=[15,4])
+    ax.grid(color='#cccccc', alpha=1.0, linewidth=0.5, linestyle=':', dashes=[1,4])
+
     ax.set_axisbelow(True)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
