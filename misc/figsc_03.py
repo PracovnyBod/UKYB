@@ -3,7 +3,7 @@
 
 figNamePrefix = 'fig_'
 
-figPlotParam = fcnDefaultFigSize(11, 0.09, 0.94, 0.07, 0.35, 13)
+figPlotParam = fcnDefaultFigSize(11, 0.14, 0.94, 0.07, 0.35, 13)
 fig = plt.figure(figNameNum, figsize=figPlotParam[0:2])
 
 subPlots = gridspec.GridSpec(1, 1, )
@@ -26,8 +26,8 @@ ax0.set_xlabel(u'Vstup\n$u$ [kg m$^2$ s$^{-2}$]', x=1.05, ha='left', va='bottom'
 
 
 #------------------
-for ax in fig.get_axes():
-    ax.set_xlabel(u'čas', x=1.05, ha='left', va='bottom')
+# for ax in fig.get_axes():
+    # ax.set_xlabel(u'čas', x=1.05, ha='left', va='bottom')
 
 #------------------
 fcnDefaultLayoutAdj(fig, figPlotParam[2], figPlotParam[3], figPlotParam[4], figPlotParam[5])
