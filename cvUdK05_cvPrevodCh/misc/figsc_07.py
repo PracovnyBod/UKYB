@@ -3,7 +3,7 @@
 
 figNamePrefix = 'cv04_fig_'
 
-figPlotParam = fcnDefaultFigSize(8.4, 0.14, 0.9, 0.12, 0.45, 13)
+figPlotParam = fcnDefaultFigSize(8.4, 0.15, 0.9, 0.12, 0.45, 13)
 fig = plt.figure(figNameNum, figsize=figPlotParam[0:2])
 
 subPlots = gridspec.GridSpec(1, 1, height_ratios=[100, ])
@@ -35,8 +35,8 @@ ax0.plot(prevodChar[:,0], prevodChar[:,1],
 
 
 #------------------
-for ax in fig.get_axes():
-    ax.set_xlabel(u'čas [s]', x=1.05,  ha='left', va='bottom')
+# for ax in fig.get_axes():
+    # ax.set_xlabel(u'čas [s]', x=1.05,  ha='left', va='bottom')
 
 #------------------
 fcnDefaultLayoutAdj(fig, figPlotParam[2], figPlotParam[3], figPlotParam[4], figPlotParam[5])
