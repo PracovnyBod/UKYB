@@ -8,6 +8,7 @@ dev
 
 
 *.pyc
+__pycache__
 
 
 *.aux
