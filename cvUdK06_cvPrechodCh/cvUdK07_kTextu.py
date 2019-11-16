@@ -249,7 +249,6 @@ posunutaPCH_u = surovaPCH_u - u_PB1
 
 
 
-
 # %% -------------------------------------------------------------------------
 
 
@@ -258,6 +257,161 @@ figNameNum = 8
 exec(open('./misc/figsc_08.py', encoding='utf-8').read())
 
 
+
+
+# %% -------------------------------------------------------------------------
+
+
+prechodChar = np.hstack([posunutaPCH_t.reshape(-1,1), posunutaPCH_y.reshape(-1,1), posunutaPCH_u.reshape(-1,1)])
+
+np.savetxt('./misc/dataRepo/prechodChar.csv', prechodChar)
+np.savetxt('./misc/dataRepo/zvolenePracovneBody.csv', [u_PB1, u_PB1_okol, u_PB2, u_PB2_okol])
+
+
+# %% -------------------------------------------------------------------------
+# %% -------------------------------------------------------------------------
+# %% -------------------------------------------------------------------------
+
+
+prechodChar = np.loadtxt('./misc/dataRepo/prechodChar.csv')
+
+posunutaPCH_t = prechodChar[:,0]
+posunutaPCH_y = prechodChar[:,1]
+posunutaPCH_u = prechodChar[:,2]
+
+
+
+
+
+
+# %% -------------------------------------------------------------------------
+
+figNameNum = 1
+# execfile(cwdPath + '/misc/figsc_01.py')
+exec(open('./misc/figsc_10_01.py', encoding='utf-8').read())
+
+
+
+
+
+
+# %% -------------------------------------------------------------------------
+
+
+
+
+theta = np.loadtxt('./misc/dataRepo/theta_poly3order.csv')
+
+theta = theta[-1::-1]   # bude potrebne opacne poradie oproti tomu ako je to ulozene
+
+u_PB1, u_PB1_okol, u_PB2, u_PB2_okol = np.loadtxt('./misc/dataRepo/zvolenePracovneBody.csv')
+
+
+
+# %% -------------------------------------------------------------------------
+
+y_PB1 =  theta[0] + theta[1] * u_PB1 + theta[2] * u_PB1**2 + theta[3] * u_PB1**3
+y_PB1_h = theta[0] + theta[1] * (u_PB1+u_PB1_okol) + theta[2] * (u_PB1+u_PB1_okol)**2 + theta[3] * (u_PB1+u_PB1_okol)**3
+y_PB1_l = theta[0] + theta[1] * (u_PB1-u_PB1_okol) + theta[2] * (u_PB1-u_PB1_okol)**2 + theta[3] * (u_PB1-u_PB1_okol)**3
+
+
+print(y_PB1_h)
+
+print(y_PB1_h - y_PB1)
+
+
+# %% -------------------------------------------------------------------------
+
+
+temp_Mask = posunutaPCH_t >= 3.0
+Delta_y = np.mean(posunutaPCH_y[temp_Mask])
+
+print(u'Delta_y = {:6.2f} [°]'.format(Delta_y))
+
+K = Delta_y/u_PB1_okol
+
+print(u'K = {:6.2f} [°/(kg m^2 s^-2)]'.format(K))
+
+
+figNameNum = 2
+exec(open('./misc/figsc_10_02.py', encoding='utf-8').read())
+
+
+# %% -------------------------------------------------------------------------
+
+
+Delta_y63 = Delta_y * 0.63
+print(u'Delta_y63 = {:6.2f}'.format(Delta_y63) + u'  [°]')
+
+
+# %% -------------------------------------------------------------------------
+
+temp_pct = 0.1
+temp_Mask = np.logical_and( (posunutaPCH_y >= (Delta_y63-(Delta_y63*temp_pct))), (posunutaPCH_y <= (Delta_y63+(Delta_y63*temp_pct))))
+print(posunutaPCH_t[temp_Mask])
+
+
+# %% -------------------------------------------------------------------------
+
+T = np.mean(posunutaPCH_t[temp_Mask])
+print(u'T = {:6.2f}'.format(T) + u'  [s]')
+
+
+# %% -------------------------------------------------------------------------
+
+
+figNameNum = 3
+exec(open('./misc/figsc_10_03.py', encoding='utf-8').read())
+
+
+
+# %% -------------------------------------------------------------------------
+
+
+
+# %% -------------------------------------------------------------------------
+
+def fcn_ss1r(x, t, u):
+
+    dotx = -(1.0/T) * x + (K/T) * u
+
+    return dotx
+
+
+
+# %% -------------------------------------------------------------------------
+
+timeVect = np.arange(0, 5.0, 0.1)
+
+# %% -------------------------------------------------------------------------
+
+
+x = odeint(fcn_ss1r,
+           [0],   # začiatočné podmienky
+           timeVect,
+           args=(u_PB1_okol,),
+           )
+
+
+# %% -------------------------------------------------------------------------
+
+figNameNum = 4
+exec(open('./misc/figsc_10_04.py', encoding='utf-8').read())
+
+
+
+
+
+# %% -------------------------------------------------------------------------
+
+
+# %% -------------------------------------------------------------------------
+
+
+# %% -------------------------------------------------------------------------
+
+
+# %% -------------------------------------------------------------------------
 
 
 # %% -------------------------------------------------------------------------

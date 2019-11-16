@@ -55,7 +55,7 @@ Pripomeňme, že v tomto bode máme dostupnú istú informáciu o predmetnom sk�
 
 
 
-\begin{figure}[!b]
+\begin{figure}[t]
 	\centering
 
     \makebox[\textwidth][c]{%
@@ -82,7 +82,18 @@ u_ine = [0:0.1:9.81];
 \end{lstlisting}
 Získame nasledujúci obrázok (obr.~\ref{Prevodová charakteristika graf2}).
 
-\begin{figure}[!t]
+
+
+Obr.~\ref{Prevodová charakteristika graf2} len lepšie ilustruje rozdielne statické zosilnenie systému pri malých a pri veľkých hodnotách vstupného signálu. Aj v ďalších častiach tohto textu budeme využívať dostupnosť modelu. Tu naposledy spomenieme, že nie je nevyhnutné mať model pre uskutočnenie toho, o čom sa v nasledujúcom píše.
+
+
+
+
+
+
+
+
+\begin{figure}[t]
 	\centering
 
     \makebox[\textwidth][c]{%
@@ -95,9 +106,6 @@ Získame nasledujúci obrázok (obr.~\ref{Prevodová charakteristika graf2}).
 	\label{Prevodová charakteristika graf2}
 
 \end{figure}
-
-Obr.~\ref{Prevodová charakteristika graf2} len lepšie ilustruje rozdielne statické zosilnenie systému pri malých a pri veľkých hodnotách vstupného signálu. Aj v ďalších častiach tohto textu budeme využívať dostupnosť modelu. Tu naposledy spomenieme, že nie je nevyhnutné mať model pre uskutočnenie toho, o čom sa v nasledujúcom píše.
-
 
 
 
@@ -362,6 +370,181 @@ Pre potreby ďalšej práce s prechodovou charaketristikou je zvyčajne výhodn�
 
 
 Konkrétne: od získaného priebehu výstupnej veličiny je potrebné odčítať hodnotu $y_{PB}$, pretože tak sa začiatok posunie v smere osi y do nuly (filozoficky... teraz nám to asi bude kaziť šum). Rovnako priebeh vstupnej veličiny je potrebné posunúť v~smere osi o hodnotu $u_{PB}$. Samozrejme, od časového vektora je potrebné odčítať čas, v~ktorom nastal jednotkový skok. Výsledok je na obr.~\ref{graf8}.
+
+
+
+
+
+
+
+
+
+
+\section{Poznámky k odčítavaniu hodnôt z grafu prechodovej charakteristiky}
+
+
+
+\subsection{Nameraná prechodová charakteristika}
+
+Z predchádzajúceho je dostupná nameraná a spracovaná prechodová charakteristika (PCH) predmetného systému. Ide o prechodovú charakteristiku v prvom pracovnom bode. Je zobrazená na obr.~\ref{graf8}.
+
+
+% \begin{figure}[!b]
+% 	\centering
+%
+%     \makebox[\textwidth][c]{%
+% 	\includegraphics{../fig/cv08_fig_1.pdf}
+% 	}
+%
+%     \vspace{-4mm}
+%
+% 	\caption{}
+% 	\label{graf11}
+%
+% \end{figure}
+
+
+Ďalej sú dostupné informácie o pracovnom bode, v ktorom bola PCH meraná. Hodnota vstupného signálu v pracovnom bode je $u = 4$ [kg m$^2$ s$^{-2}$] a uvažuje sa okolie pracovného bodu $u = 4 \pm 0,8$ [kg m$^2$ s$^{-2}$].
+
+Je dostupný podel prevodovej charakteristiky a teda je možné odhadnúť hodnotu výstupnej veličiny v pracovnom bode, teda
+\begin{equation}
+    \hat y_{PB1} = 0,1111\ u_{PB1}^3  -1,1150\ u_{PB1}^2 + 8,9102\ u_{PB1}  -1,1770
+\end{equation}
+kde $u_{PB1} = 4$ [kg m$^2$ s$^{-2}$] a teda $\hat y_{PB1} = 23,73$ [°]. Rovnako je možné vypočítať hodnotu výstupného signálu pre, nazvime to, hornú hranicu okolia pracovného bodu, to znamená pre hodnotu na vstupe $u_{PB1_h} = 4 + 0,8$ [kg m$^2$ s$^{-2}$]. Tejto zodpovedá hodnota $\hat y_{PB1_h} = 28.19$ [°].
+
+Keďže prechodová charakteristika na obr.~\ref{graf8} je posunutá do nuly, teda od skutočných hodnôt sú odčítané hodnoty v pracovnom bode, tak urobme túto úpravu aj pre práve vypočítané hodnoty, teda
+\begin{align}
+    \Delta u_{PB1} &= u_{PB1_h} - u_{PB1} = 0,8 \\
+    \Delta \hat y_{PB1} &= \hat y_{PB1_h} -  \hat y_{PB1} = 4,52
+\end{align}
+
+
+
+
+\subsection{Statické zosilnenie $K$}
+
+Zistime statické zosilnenie systému v okolí uvažovaného pracovného bodu. Potrebujeme hodnotu, na ktorej sa ustálila výstupná veličina po prechodovom deji. Z grafu PCH uvažujme, že výstupná veličina je už ustálená po čase $t=3$ [s] (dajme tomu teraz takto). Priemerná hodnota výstupnej veličiny po tomto čase je $\Delta y = 5.52$ [°].
+
+Teda, po uskutočnení jednotkového skoku v okolí pracovného bodu sa výstupná veličina zmenila o $\Delta y$ [°]. Zmena na vstupe $\Delta u$ bola, samozrejme, práve jednotková (pretože jednotkový skok). V tomto prípade má jednotkový skok veľkosť okolia pracovného bodu  $\Delta u = 0,8$ [kg m$^2$ s$^{-2}$].
+
+Statické zosilnenie systému, na základe prechodovej charakteristiky, označme $K$, je $K = \frac{\Delta y}{\Delta u}$, číselne
+\begin{equation}
+     K = 6,9 \text{[°/(kg m$^2$ s$^{-2}$)]}
+\end{equation}
+Uvedené možno znázorniť aj do grafu - viď obr.~\ref{graf20}
+
+
+\begin{figure}[t]
+	\centering
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{../fig/cv08_fig_2.pdf}
+	}
+
+    \vspace{-4mm}
+
+	\caption{}
+	\label{graf20}
+
+\end{figure}
+
+
+
+
+Statické zosilnenie systému je, samozrejme, možné zistiť aj pomocou prevodovej charakteristiky. V skutočnosti, všetko potrebné už máme k dispozícii.
+
+Mimochodom, ak by sme neboli leniví, tak nájdeme dotyčnicu v pracovnom bode, a jej smernica (sklon) by mala byť statické zosilnenie. To by bol formálne korektný postup.
+
+My však leniví sme, preto: hľadáme sklon prevodovej charakteristiky v okolí pracovného bodu. Z praktického hľadiska, nech je sklon daný pracovným bodom a bodom ohraničujúcim okolie pracovného bodu zhora. Formálne $\text{sklon} = \frac{\Delta y}{\Delta u}$ kde $\Delta y = \hat y_{PB_h} - \hat y_{PB}$ a~$\Delta u = u_{PB_h} - u_{PB}$. To je, samozrejme, to isté ako vyplynulo z~využitia prechodovej charakteristiky vyššie. Tu však číselné hodnoty nie sú odčítané z~prechodovej charakteristiky ale z~modelu prevodovej charakteristiky. Konkrétne čísla:
+\begin{equation}
+    \text{sklon} = \frac{\hat y_{PB_h} - \hat y_{PB}}{u_{PB_h} - u_{PB}} = \frac{4,52}{0,8} = 5.65
+\end{equation}
+Odchýlka od statického zosilnenia určeného z prechodovej charakteristiky je $-1,25$ [°], t.j. $18,10$ [\%] (tá je samozrejme daná aj tým, že používame model prevodovej charakteristiky, keďže konkrétne potrebné hodnoty v rámci nameranej prevodovej charakteristiky nie sú dostupné).
+
+
+
+
+
+\subsection[Časová konštanta $T$ pre lineárny dynamický systém 1. rádu]{Časová konštanta $T$ pre lineárny dynamický systém 1. rádu}
+
+
+Ďalej je možné nájsť model, ktorý má vystihovať dynamiku (dynamické vlastnosti) reálneho systému. Modelom nech je lineárny dynamický systém.
+
+Kvalifikovaný odhad založený na grafickom znázornení predmetnej prechodovej charakteristiky vedie k možnosti, že modelom systému môže byť dynamický systém 1. rádu. Tento je možné zapísať v tvare prenosovej funkcie
+\begin{equation}
+    G(s) = \frac{y(s)}{u(s)} = \frac{K}{Ts+1}
+\end{equation}
+kde $K$ je možné interpretovať ako statické zosilnenie systému a $T$ je časová konštanta.
+
+Časovú konštantu je možné nájsť na základe prechodovej charakteristiky. Je to čas od začiatku prechodovej charakteristiky (od času jednotkového skoku), v ktorom výstupná veličina dosiahla približne 63 \% zo svojej ustálenej hodnoty.
+
+Prečo práve 63 \%? Odpoveď sa ponecháva na čitateľa.
+
+100 \% z ustálenej hodnoty na nasledujúcom obrázku~\ref{graf30} je samozrejme hodnota $\Delta y$. Potom 63 \% je hodnota $\Delta y_{63} =  3,48$ [°]
+
+
+
+\begin{figure}[t]
+	\centering
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{../fig/cv08_fig_3.pdf}
+	}
+
+    \vspace{-4mm}
+
+	\caption{}
+	\label{graf30}
+
+\end{figure}
+
+
+Hodnotu $T$ teraz možno hľadať „od oka“, doslova pomocou grafu PCH, prípadne „od oka“, ale trošku inak - napr: Nájdime hodnoty výstupnej veličiny, ktoré sú v~pásme (volajme ho „od oka“) $\pm ? \%$ v okolí hodnoty $\Delta y_{63}$. Presnejšie, nájdime časy tých vzoriek, ktoré sú v~tom pásme. Nájdené body v~pásme „od oka“ okolo hodnoty $\Delta y_{63}$ sú na obr.~\ref{graf30} vyznačené ako malé zelené kružnice. Priemer z nájdených časov je
+\begin{equation}
+    T =  0,81 \text{[s]}
+\end{equation}
+A táto hodnota môže byť celkom dobre „od oka“ odčítaná časová konštanta. Všetko uvedené je nakreslené na obr.~\ref{graf30}.
+
+
+
+
+
+\subsection{Verifikácia identifikovaného dynamického modelu}
+
+
+V predchádzajúcom boli na základe prechodovej charakteristiky určené parametre lineárneho dynamického systému, ktorý má byť modelom skutočného systému. Tento model je možné vyjadriť v tvare prenosovej funkcie
+\begin{equation}
+    \frac{y(s)}{u(s)} = \frac{K}{Ts+1}
+\end{equation}
+
+
+
+Pre verifikáciu modelu je možné využiť grafické porovnanie prechodovej charakteristiky modelu a skutočnej prechodovej charakteristiky. Pre získanie PCH modelu využime numerickú simuláciu. Daná prenosová funkcia zodpovedá diferenciálnej rovnici v tvare
+\begin{align}
+    T \dot y(t) + y(t) &= K u(t) \\
+    T \dot y(t) &= - y(t) + K u(t) \\
+    \dot y(t) &= - \frac{1}{T} y(t) + \frac{K}{T} u(t)
+\end{align}
+Vstupný signál zvoľme rovnaký ako je veľkosť $\Delta u$. Tak zabezpečíme zodpovedajúcu veľkosť jednotkového skoku, ktorý je použitý v numerickej simulácii pre získanie PCH.
+
+Do spoločného obrázka nakreslime nameranú PCH a PCH modelu systému - viď obr.~\ref{graf40}
+
+\begin{figure}[t]
+	\centering
+
+    \makebox[\textwidth][c]{%
+	\includegraphics{../fig/cv08_fig_4.pdf}
+	}
+
+    \vspace{-4mm}
+
+	\caption{}
+	\label{graf40}
+
+\end{figure}
+
+Týmto (aspoň pre naše potreby) možno model považovať za verifikovaný - znamená to, že daný model je schopný vystihnúť vlastnosti skutočného systému a že je možné na základe dostupných informácií (prechodová charakteristika) nájsť parametre modelu.
+
 
 
 
