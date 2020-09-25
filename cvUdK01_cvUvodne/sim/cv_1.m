@@ -25,7 +25,7 @@ legend on
 grid on
 hold on
 %%
-i=1; %aktualne cislo experimentu (1-3) - ovplyvnuje parametre R,C,u_0
+i=3; %aktualne cislo experimentu (1-3) - ovplyvnuje parametre R,C,u_0
 
 u_0=u_0_vec(i); %pociatocne napatie (pociatocna podmienka integratora)
 R=R_vec(i); %odpor rezistora (parameter - konstanta)
