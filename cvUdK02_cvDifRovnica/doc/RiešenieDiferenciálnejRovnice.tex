@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[slovak]{babel}
 \usepackage{amsmath}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -34,6 +35,8 @@ Riešenie diferenciálnej rovnice spočíva v nájdení \emph{funkcie} $f(t)$ po
 Počiatočné podmienky (hodnoty premenných a ich derivácii v čase $t=0$) nech sú dané ako $y_0$ a $\dot{y}_0$.
 Táto úloha sa potom zvykne označovať aj pojmom \emph{``initial value problem''} 
 
+\pagebreak
+
 \section{Charakteristická rovnica}
 
 Charakteristická rovnica vychádza priamo z koeficientov diferenciálnej rovnice (charakteristický polynóm premennej $\lambda$) a je formulovaná nasledovne:
@@ -47,7 +50,7 @@ Tieto korene hľadáme štandardne tak, ako v prípade kvadratickej rovnice.
 
 Diskriminant rovnice: 
 \begin{equation}
- D=\sqrt{a_1^2-4a_0}
+ D=a_1^2-4a_0
 \end{equation}
 
 Riešenie charakteristickej rovnice:
@@ -78,6 +81,7 @@ Prvá derivácia riešenia bude:
  \dot{y}(t)=c_1 \lambda_1 e^{\lambda_1 t}+c_2 \lambda_2 e^{\lambda_2 t}
 \end{equation}
 
+
 \subsection{Dvojnásobný reálny koreň}
 Riešenie diferenciálnej rovnice je v tomto prípade všeobecne definované nasledovne:
 \begin{equation}
@@ -90,16 +94,17 @@ Prvá derivácia riešenia bude:
  \dot{y}(t)=c_1 \lambda e^{\lambda t}+c_2e^{\lambda t} \left( 1+ t \lambda \right)
 \end{equation}
 
+
 \subsection{Dva komplexne združené korene}
 
 Komplexne združený koreň má rovnakú reálnu a opačnú imaginárnu zložku.
 
-\begin{equation}
+\begin{equation*}
   \begin{array}{l}
   	\lambda_1=\lambda_a+i \lambda_b \\
   	\lambda_2=\lambda_a-i \lambda_b
   \end{array}
-\end{equation}
+\end{equation*}
 
 Riešenie diferenciálnej rovnice je v tomto prípade všeobecne definované ako súčet komplexných exponenciál.
 A keďže komplexná exponenciála obsahuje periodickú zložku:
@@ -118,6 +123,7 @@ Prvá derivácia riešenia bude:
  \dot{y}(t)=c_1 e^{\lambda_a t} \left( \lambda_a \cos(\lambda_b t)- \lambda_b \sin(\lambda_b t) \right) +
  c_2 e^{\lambda_a t} \left(\lambda_a \sin(\lambda_b t) + \lambda_b \cos(\lambda_b t)  \right) 
 \end{equation}
+
 
 \section{Riešenie s počiatočnými podmienkami}
 Pre určenie koeficientov riešenia diferenciálnej rovnice $c_i$, potrebujeme poznať počiatočné podmienky.
@@ -139,7 +145,7 @@ Do rovníc riešenia \eqref{eq:riešenie reálne korene} a derivácie riešenia 
 Zostavíme zodpovedajúcu sútavu rovníc
 
 \begin{equation}
-\label{eq: sústava pre dvojnásobný koreň}
+\label{eq:sústava pre reálne korene}
 	\left(\begin{array}{c}
 		y_0\\
 		\dot{y}_0\\
@@ -170,7 +176,7 @@ Do rovníc riešenia \eqref{eq:riešenie dvojnásobný koreň} a derivácie rie�
 Zostavíme zodpovedajúcu sútavu rovníc
 
 \begin{equation}
-\label{eq: sústava pre reálne korene}
+\label{eq:sústava pre dvojnásobný koreň}
 	\left(\begin{array}{c}
 		y_0\\
 		\dot{y}_0\\
@@ -201,7 +207,7 @@ Do rovníc riešenia \eqref{eq:riešenie komplexné korene} a derivácie riešen
 Zostavíme zodpovedajúcu sútavu rovníc
 
 \begin{equation}
-\label{eq: sústava pre komplexné korene}
+\label{eq:sústava pre komplexné korene}
 	\left(\begin{array}{c}
 		y_0\\
 		\dot{y}_0\\
@@ -216,7 +222,7 @@ Zostavíme zodpovedajúcu sútavu rovníc
 	\end{array}\right)
 \end{equation}
 
-
+\pagebreak
 
 \section{Príklady}
 
@@ -241,14 +247,11 @@ Riešenie charakteristickej rovnice \eqref{eq:charakteristická rovnica riešeni
 \end{equation*}
 
 \begin{equation*}
-\begin{array}{c}
-	\lambda_1=-2\\
-	\lambda_2=-1\\
-\end{array}
+	\lambda_2=-1 \qquad \lambda_1=-2
 \end{equation*}
 
 Získavame dva rôzne reálne korene.
-Formulujeme sústavu rovníc \eqref{eq: sústava pre reálne korene}.
+Formulujeme sústavu rovníc \eqref{eq:sústava pre reálne korene}.
 
 \begin{equation*}
 	\begin{array}{c}
@@ -271,16 +274,38 @@ Výsledné riešenie diferenciálnej rovnice je vo forme funkcie \eqref{eq:diff 
  y(t)=-7e^{-2t}+11e^{-t}
 \end{equation*}
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.7\textwidth]{graf_1} 
+\caption{Časový priebeh funkcie riešenia}
+\end{figure}
+
+\pagebreak
+
 \subsection{Príklad}
 
 \begin{equation*}
 \ddot{y}+6\dot{y}+9y=0
 \end{equation*}
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.7\textwidth]{graf_2} 
+\caption{Časový priebeh funkcie riešenia}
+\end{figure}
+
+\pagebreak
+
 \subsection{Príklad}
 
 \begin{equation*}
 \ddot{y}+2\dot{y}+10y=0
 \end{equation*}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.7\textwidth]{graf_3} 
+\caption{Časový priebeh funkcie riešenia}
+\end{figure}
 
 \end{document}
