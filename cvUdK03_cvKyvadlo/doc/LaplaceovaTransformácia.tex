@@ -1,0 +1,245 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[slovak]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Riešenie lineárnej diferenciálnej rovnice druhého rádu s využitím Laplaceovej transformácie}
+\author{Martin Dodek}
+\pagestyle{plain}
+\maketitle
+
+\section{Diferenciálna rovnica}
+Majme diferenciálnu rovnicu druhého rádu s konštantnými koeficientami (rovnaká ako na minulom cvičení):
+
+\begin{equation}
+\label{eq:diff_eq}
+\ddot{y}+a_1\dot{y}+a_0y=0
+\end{equation}
+
+Riešenie diferenciálnej rovnice spočíva v nájdení \emph{funkcie} $f(t)$ popisujúcej vývoj premennej $y$ v čase.
+\begin{equation*}
+	y(t)=f(t)
+\end{equation*}
+
+Počiatočné podmienky (hodnoty premenných a ich derivácii v čase $t=0$) nech sú dané ako $y_0$ a $\dot{y}_0$.
+
+Laplaceovu transformáciu je možné použiť iba pre riešenie \underline{lineárnych} diferenciálnych rovníc (tento prípad).
+
+\section{Laplaceova transformácia}
+Laplaceova transformácia je integrálnou transformáciou definovanou ako:
+\begin{equation}
+\label{eq:LPT}
+ \mathcal{L}\left\lbrace f(t)\right\rbrace=\int_{0}^{\infty}{e^{-st}f(t)dt}
+\end{equation}
+Interpretovať ju môžeme ako integrál vlastných kmitov, respektíve ako koreláciu signálu $f(t)$ (v časovej oblasti) s komplexnou exponenciálou $e^{-st}$ (v $s$ oblasti).
+
+Kde $s$ je komplexná premenná a je označovaná aj ako Laplaceov operátor.
+
+\pagebreak
+
+\subsection{Vzťah Laplaceovej transformácie a derivácie}
+Z pohľadu kybernetiky je najdôležitejšou vlastnosťou jej vzťah k derivácii signálu $f(t)$.
+Zjednodušene povedané, operátor $s$ reprezentuje operáciu časovej derivácie.
+Presnejšie:
+\begin{equation}
+\label{eq:LPT prva derivacia}
+	\mathcal{L}\left\lbrace\dot{f}(t) \right\rbrace=s\mathcal{L}\left\lbrace f(t)\right\rbrace-f(0)
+\end{equation}
+
+Kde $f(0)$ je počiatočná podmienka - hodnota signálu v čase 0.
+
+Pre vyššie derivácie signálu potom platí reťazové pravidlo.
+
+Druhá derivácia:
+\begin{equation}
+\label{eq:LPT druha derivacia}
+	\mathcal{L}\left\lbrace\ddot{f}(t) \right\rbrace=s\left(  s\mathcal{L}\left\lbrace f(t)\right\rbrace-f(0) \right)-\dot{f}(0)
+\end{equation}
+
+Teda po úprave:
+\begin{equation}
+\label{eq:LPT nta derivacia}
+	\mathcal{L}\left\lbrace\ddot{f}(t) \right\rbrace=s^2 \mathcal{L}\left\lbrace f(t)\right\rbrace -s f(0) -\dot{f}(0)
+\end{equation}
+
+Kde $f(0)$ je počiatočná hodnota signálu a $\dot{f}(0)$ je počiatočná hodnota jeho prvej derivácie.
+
+Všeobecný vzťah pre obraz derivácie vyššieho stupňa $n$
+
+\begin{equation}
+	\mathcal{L}\left\lbrace f^n(t) \right\rbrace=s^n \mathcal{L}\left\lbrace f(t)\right\rbrace - s^{(n-1)}f(0) \ldots -f^{(n-1)}(0)
+\end{equation}
+
+
+\subsection{Laplaceova transformácia exponenciálnej funkcie}
+Pre účely riešenia diferenciálnych rovníc a teda aj analýzu lineárnych systémov je zvlášť dôležitý Laplaceov obraz exponenciálnej funkcie.
+
+Jej obraz bude:
+
+\begin{equation*}
+\mathcal{L}\left\lbrace e^{at}\right\rbrace=\int_{0}^{\infty}{e^{-st}e^{at}dt}
+\end{equation*}
+
+\begin{equation*}
+\mathcal{L}\left\lbrace e^{at}\right\rbrace=\int_{0}^{\infty}{e^{(a-s)t}dt}
+\end{equation*}
+
+
+\begin{equation*}
+\mathcal{L}\left\lbrace e^{at}\right\rbrace=\frac{1}{a-s}\left[e^{(a-s)t} \right]_{0}^{\infty}
+\end{equation*}
+
+Čo vo výsledku je:
+
+\begin{equation}
+\label{eq:LPT exp}
+\mathcal{L}\left\lbrace e^{at}\right\rbrace=\frac{1}{s-a}
+\end{equation}
+
+\pagebreak
+
+\section{Riešenie diferenciálnej rovnice}
+
+Diferenciálnu rovnicu \eqref{eq:diff_eq} môžeme s využitím obrazu Laplaceovej transformácie derivácie signálu $y(t)$ aj jeho vyšších derivácii \eqref{eq:LPT nta derivacia} formulovať ako:
+
+\begin{equation}
+\label{eq:LPT diferencialnej rovnice}
+Y(s)\left(s^2+a_1s+a_0\right)=sy_0+\dot{y}_0+a_1 y_0
+\end{equation}
+
+Vyjadrením obrazu signálu $Y(s)$ získavame racionálnu funkciu:
+\begin{equation}
+\label{eq:racionalna funkcia}
+Y(s)=\frac{sy_0+\dot{y}_0+a_1y_0}{s^2+a_1s+a_0}
+\end{equation}
+
+Pre účely riešenia diferenciálnej rovnice (získanie časovej funkcie $y(t)$ ) musíme túto funkciu rozložiť na parciálne zlomky:
+
+\begin{equation}
+\label{eq:parcialne zlomky}
+Y(s)=\frac{sy_0+\dot{y}_0+a_1 y_0}{(s-\lambda_1)(s-\lambda_2)}=\frac{A}{s-\lambda_1}+\frac{B}{s-\lambda_2}
+\end{equation}
+
+Je preto nutné nájsť korene menovateľa racionálnej funkcie : $\lambda_1$ a $\lambda_2$.
+Zostavíme teda charakteristikcú rovnicu (kvadratickú rovnicu):
+\begin{equation}
+ s^2+a_1s+a_0=0
+\end{equation}
+
+Riešením charakteristickej rovnice sú korene $\lambda_1$ a $\lambda_2$ (všeobecne komplexné):
+\begin{equation}
+\label{eq:charakteristická rovnica riešenie}
+ \lambda_{1,2}=\frac{-a_1\pm \sqrt{a_1^2-4a_0}}{2}
+\end{equation}
+
+
+Pre určenie koeficentov $A$ a $B$ si pravú stranu rovnice \eqref{eq:parcialne zlomky} upravíme na spoločného menovateľa:
+
+\begin{equation}
+\label{eq:parcialne zlomky upravene}
+Y(s)=\frac{sy_0+\dot{y}_0+a_1 y_0}{(s-\lambda_1)(s-\lambda_2)}=\frac{A(s-\lambda_2)+B(s-\lambda_1)}{(s-\lambda_1)(s-\lambda_2)}
+\end{equation}
+
+Zavedieme rovnosť polynómov:
+\begin{equation*}
+sy_0+\dot{y}_0+a_1 y_0=(A+B)s-(A\lambda_2+B\lambda_1)
+\end{equation*}
+
+Koeficienty $A$ a $B$ potom určíme ako riešenie vzniknutej sústavy lineárnych rovníc.
+
+Pre formuláciu všeobecného riešenia diferenciálnej rovnice využijeme znalosť Laplaceovho obrazu exponenciálnej funkcie \eqref{eq:LPT exp}.
+
+Realizujeme tak vlastne \underline{spätnú} Laplaceovu transformáciu rovnice \eqref{eq:parcialne zlomky}.
+
+
+\begin{equation}
+\label{eq: riešenie všeobecné}
+y(t)=Ae^{\lambda_1t}+Be^{\lambda_2t}
+\end{equation}
+
+\pagebreak
+
+\section{Príklad}
+Majme konkrétnu diferenciálnu rovnicu (rovnaká ako na minulom cvičení):
+
+\begin{equation*}
+\ddot{y}+3\dot{y}+2y=0 
+\end{equation*}
+
+Počiatočné podmienky nech sú dané:
+\begin{equation*}
+	y_0=4\quad \dot{y}_0=3;
+\end{equation*}
+
+Realizujeme Laplaceovu transformáciu tejto rovnice v zmysle \eqref{eq:LPT diferencialnej rovnice}
+
+\begin{equation*}
+	Y(s)\left(s^2+3s+2\right)=4s+3+3\times4
+\end{equation*}
+
+Získavame racionálnu funkciu, podobne ako vo všeobecnom riešení \eqref{eq:racionalna funkcia}
+
+\begin{equation*}
+Y(s)=\frac{4s+15}{s^2+3s+2}
+\end{equation*}
+
+Charakteristická rovnica bude zostavená v tvare:
+\begin{equation*}
+	s^2+3s+2=0
+\end{equation*}
+
+Riešenie charakteristickej rovnice \eqref{eq:charakteristická rovnica riešenie}
+\begin{equation*}
+	\lambda_{1,2}=\frac{-3\pm\sqrt{9-8}}{2}
+\end{equation*}
+
+Korene teda budú reálne:
+\begin{equation*}
+	\lambda_2=-1 \qquad \lambda_1=-2
+\end{equation*}
+
+
+Racionálnu funkciu rozložíme na parciálne zlomky rovnako ako v \eqref{eq:parcialne zlomky}
+
+\begin{equation*}
+Y(s)=\frac{4s+15}{(s+1)(s+2)}=\frac{A}{s+1}+\frac{B}{s+2}
+\end{equation*}
+
+Úpravou na spoločného menovateľa \eqref{eq:parcialne zlomky upravene}
+
+\begin{equation*}
+Y(s)=\frac{4s+15}{(s+1)(s+2)}=\frac{A(s+2)+B(s+1)}{(s+1)(s+2)}
+\end{equation*}
+
+Zo zavedenej rovnosti polynómov vyplýva:
+
+\begin{equation*}
+(A+B)s+(2A+B)=4s+15
+\end{equation*}
+
+Získame sústavu lineárnych rovníc:
+\begin{equation*}
+\begin{array}{c}
+	A+B=4 \\
+	2A+B=15
+\end{array}
+\end{equation*}
+
+Jej riešenie bude:
+
+\begin{equation*}
+A=11 \quad B=-7
+\end{equation*}
+
+Využijeme znalosť Laplaceovho obrazu exponenciálnej funkcie \eqref{eq:LPT exp}.
+Ak realizujeme spätnú Laplaceovu transformáciu potom riešenie bude v zmysle \eqref{eq: riešenie všeobecné}
+
+\begin{equation*}
+y(t)=-7e^{-t}+11e^{-2t}
+\end{equation*}
+
+
+\end{document}
