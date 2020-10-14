@@ -241,5 +241,101 @@ Ak realizujeme spätnú Laplaceovu transformáciu potom riešenie bude v zmysle 
 y(t)=11e^{-t}-7e^{-2t}
 \end{equation*}
 
+\pagebreak
+
+\section{Príklad}
+Majme konkrétnu nehomogénnu diferenciálnu rovnicu (obsahuje vstup $u(t)$):
+
+\begin{equation*}
+\ddot{y}+5\dot{y}+6y=u(t) 
+\end{equation*}
+
+Počiatočné podmienky nech sú nulové:
+\begin{equation*}
+	y_0=0\quad \dot{y}_0=0
+\end{equation*}
+
+Vstupný signál $u(t)$ nech je daný ako konštantný skok
+\begin{equation*}
+	u(t)=5
+\end{equation*}
+
+Nájdeme Laplaceov obraz vstupného signálu $u(t)$
+\begin{equation*}
+	U(s)=\frac{5}{s}
+\end{equation*}
+
+Realizujeme Laplaceovu transformáciu diferenciálnej rovnice v zmysle \eqref{eq:LPT diferencialnej rovnice}
+
+\begin{equation*}
+	Y(s)\left(s^2+5s+6\right)=U(s)
+\end{equation*}
+
+Pre tento systém môžeme definovať jeho prenosovú funkciu:
+\begin{equation*}
+	\frac{Y(s)}{U(s)}=\frac{1}{s^2+5s+6}
+\end{equation*}
+
+Po dosadení obrazu vstupného signálu $U(s)$ získavame racionálnu funkciu:
+
+\begin{equation*}
+Y(s)=\frac{5}{\left(s^2+5s+6\right)s}
+\end{equation*}
+
+Charakteristická rovnica bude zostavená v tvare:
+\begin{equation*}
+	\left(s^2+5s+6\right)s=0
+\end{equation*}
+
+Riešenie charakteristickej rovnice (nenulové korene)
+\begin{equation*}
+	\lambda_{1,2}=\frac{-5\pm\sqrt{25-24}}{2}
+\end{equation*}
+
+Korene teda budú reálne (z toho jeden nulový):
+\begin{equation*}
+	 \lambda_0=0 \qquad \lambda_1=-2 \qquad \lambda_2=-3
+\end{equation*}
+
+Racionálnu funkciu rozložíme na parciálne zlomky:
+
+\begin{equation*}
+Y(s)=\frac{5}{s(s+2)(s+3)}=\frac{A}{s}+\frac{B}{s+2}+\frac{C}{s+3}
+\end{equation*}
+
+Úpravou na spoločného menovateľa:
+
+\begin{equation*}
+Y(s)=\frac{5}{(s+2)(s+3)s}=\frac{A(s+2)(s+3)+B(s+3)s+C(s+2)s}{(s+2)(s+3)s}
+\end{equation*}
+
+Zo zavedenej rovnosti polynómov vyplýva:
+
+\begin{equation*}
+\left(A+B+C\right)s^2+\left(5A+3B+2C\right)s+6A=5
+\end{equation*}
+
+Získame sústavu lineárnych rovníc:
+\begin{equation*}
+\begin{array}{c}
+	A+B+C=0 \\
+	5A+3B+2C=0\\
+	6A=5
+\end{array}
+\end{equation*}
+
+Jej riešenie bude:
+
+\begin{equation*}
+A=\frac{5}{6} \quad B=-2.5 \quad C=\frac{5}{3}  
+\end{equation*}
+
+Využijeme znalosť Laplaceovho obrazu exponenciálnej funkcie \eqref{eq:LPT exp}.
+Ak realizujeme spätnú Laplaceovu transformáciu potom riešenie bude:
+
+\begin{equation*}
+y(t)=\frac{5}{6}-2.5e^{-2t}+\frac{5}{3}e^{-3t}
+\end{equation*}
+
 
 \end{document}
