@@ -21,7 +21,7 @@ B=[1,1];
 A=[3 1];
 %% Systém prvého rádu s nestabilnou nulou - neminimálne fázový
 D=0;
-B=[1,-1];
+B=[-1,1];
 A=[3 1];
 %% Systém druhého rádu - dvojnásobný reálny pól - aperiodický priebeh
 D=0; 
@@ -67,6 +67,7 @@ close all;
 G=tf(B,A,'InputDelay',D);
 poles=roots(A)
 figure();
+k=B(end)/A(end);
 set(gcf,'Position',[50 50 1800 950])
 subplot(2,2,1)
 stepplot(G,'-k');
