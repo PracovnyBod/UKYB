@@ -16,42 +16,40 @@ omega_0=0; %uhlová rıchlos
 %%
 close all;
 
-T_step=Tsim/5;
+T_step=Tsim/5; %èas v ktorom dôjde k skoku vstupného signálu z u1 na u2
 
-y_pb_1=deg2rad(25);
-y_pb_2=deg2rad(75);
+y_pb_1=deg2rad(25); %hodnota vıchlylky v pracovnom bode 1
+y_pb_2=deg2rad(75); %hodnota vıchlylky v pracovnom bode 2
 
-phi_0=y_pb_1*1.0;
+phi_0=y_pb_1*1.0; %poèiatoèná podmienka vıchlylky (môe by rovnaká ako y_pb_1)
 
-u_1=m*g*l*sin(y_pb_1);
-u_2=m*g*l*sin(y_pb_2);
-
+u_1=m*g*l*sin(y_pb_1); %hodnota vstupu systému v pracovnom bode 1 (vypoèítaná z prevodovej charakteristiky)
+u_2=m*g*l*sin(y_pb_2); %hodnota vstupu systému v pracovnom bode 2 (vypoèítaná z prevodovej charakteristiky)
 
 simout=sim('cv_7_sim'); %spustíme simuláciu
+phi_nonlinear=simout.phi_nonlinear; %extrakcia premennej vıchylky
 
-phi_nonlinear=simout.phi_nonlinear;
+window_size=10; %dåka priemerovacieho okna
 
-window_size=10;
+y_1=mean(phi_nonlinear(T_step/Ts-window_size:T_step/Ts)); %zmeraná hodnota ustálenej vıchlylky v pracovnom bode 1 (mala by by blíka y_pb_1)
+y_2=mean(phi_nonlinear(end-window_size:end));   %zmeraná hodnota ustálenej vıchlylky v pracovnom bode 1 (mala by by blíka y_pb_1)
 
-y_1=mean(phi_nonlinear(T_step/Ts-window_size:T_step/Ts));
-y_2=mean(phi_nonlinear(end-window_size:end));
+delta_u=u_2-u_1;    %ve¾kos zmeny vstupného signálu medzi pracovnımi bodmi
+delta_y=y_2-y_1;    %ve¾kos zmeny vıstupného signálu (vıchylky) medzi pracovnımi bodmi
 
-delta_u=u_2-u_1;
-delta_y=y_2-y_1;
+y=phi_nonlinear(T_step/Ts:end)-y_1;  %relatívny posun vıchylky voèi prvému pracovnému bodu
+time=simout.tout(T_step/Ts:end);     %orezanie èasového signálu
+time=time-time(1);                   %posunutie èasového signálu voèi okamihu skoku
 
-y=phi_nonlinear(T_step/Ts:end)-y_1;
-time=simout.tout(T_step/Ts:end);
-time=time-time(1);
-
-K=delta_y/delta_u;
+K=delta_y/delta_u;                   %vıpoèet zosilnenia systému
 %K_anal=1/m/g/l/sqrt(1-(u_1/m/g/l)^2);
-y_at_Tc=delta_u*K*(1-exp(-1)); % 63 percent
+y_at_Tc=delta_y*(1-exp(-1)); %  oèakávaná hodnota relatívnej vıchylky v èase zhodnom s èasovou konštantou Tc (63 percent hodnoty ustálenej relatívnej vıchylky )
 
-[ans,Tc_idx]=min((y-y_at_Tc).^2);
-Tc=time(Tc_idx);
+[ans,Tc_idx]=min((y-y_at_Tc).^2); %nájdenie indexu vektora vıchylky y s hodnotou najblišou k y_at_Tc
+Tc=time(Tc_idx); %èasová konštanta je hodnota èasu na tomto indexe
 
-F=tf(K,[Tc,1]);
-y_sim=lsim(F,delta_u*ones(size(time)),time);
+F=tf(K,[Tc,1]);  %objekt prenosovej funkcie prvého rádu F(s)=1/(Tc*s+1)
+y_sim=lsim(F,delta_u*ones(size(time)),time); %numerické riešenie odozvy systému F(s) na delta_u skok
 
 figure(1);
 hold on;
