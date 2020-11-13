@@ -19,9 +19,9 @@ close all;
 T_step=Tsim/2; %èas v ktorom dôjde k skoku vstupného signálu z u1 na u2
 
 y_pb_1=deg2rad(25); %hodnota vıchlylky v pracovnom bode 1
-y_pb_2=deg2rad(75); %hodnota vıchlylky v pracovnom bode 2
+y_pb_2=deg2rad(30); %hodnota vıchlylky v pracovnom bode 2
 
-phi_0=y_pb_1*0.0; %poèiatoèná podmienka vıchlylky (môe by rovnaká ako y_pb_1)
+phi_0=y_pb_1*0.0; %poèiatoèná podmienka vıchlylky (môe by rovnaká ako y_pb_1, ale ideálne nulová)
 
 u_1=m*g*l*sin(y_pb_1); %hodnota vstupu systému v pracovnom bode 1 (vypoèítaná z prevodovej charakteristiky)
 u_2=m*g*l*sin(y_pb_2); %hodnota vstupu systému v pracovnom bode 2 (vypoèítaná z prevodovej charakteristiky)
@@ -42,9 +42,8 @@ time=simout.tout(T_step/Ts:end);     %orezanie èasového signálu
 time=time-time(1);                   %posunutie èasového signálu voèi okamihu skoku
 
 K=delta_y/delta_u;                   %vıpoèet zosilnenia systému
-%K_anal=1/m/g/l/sqrt(1-(u_1/m/g/l)^2);
-y_at_Tc=delta_y*(1-exp(-1)); %  oèakávaná hodnota relatívnej vıchylky v èase zhodnom s èasovou konštantou Tc (63 percent hodnoty ustálenej relatívnej vıchylky ) nako¾ko y(t)=K*(1-e^(-t/Tc))
-
+y_at_Tc=delta_y*0.6321;
+%y_at_Tc=delta_y*(1-exp(-1)); %  oèakávaná hodnota relatívnej vıchylky v èase zhodnom s èasovou konštantou Tc (63 percent hodnoty ustálenej relatívnej vıchylky ) nako¾ko y(t)=K*(1-e^(-t/Tc))
 [ans,Tc_idx]=min((y-y_at_Tc).^2); %nájdenie indexu vektora vıchylky y s hodnotou najblišou k y_at_Tc
 Tc=time(Tc_idx); %èasová konštanta je hodnota èasu na tomto indexe
 
