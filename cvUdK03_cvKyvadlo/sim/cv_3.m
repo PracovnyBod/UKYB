@@ -19,12 +19,12 @@ simout=sim('cv_3_sim'); %spustíme simuláciu
 
 phi_nonlinear=simout.phi_nonlinear;
 phi_linear=simout.phi_linear;
-T_sim=simout.tout;
+time=simout.tout;
 
 figure(1);
 hold on;
-plot(T_sim,phi_nonlinear,'-k','LineWidth',2); %vykreslíme signál uhlovej polohy nelineárneho modelu
-plot(T_sim,phi_linear,'-.k','LineWidth',2); %vykreslíme signál uhlovej polohy lineárneho modelu
+plot(time,phi_nonlinear,'-k','LineWidth',2); %vykreslíme signál uhlovej polohy nelineárneho modelu
+plot(time,phi_linear,'-.k','LineWidth',2); %vykreslíme signál uhlovej polohy lineárneho modelu
 title('Priebeh výchylky kyvadla') 
 xlabel('èas[s]')  %oznacime si osi grafov
 ylabel('\phi [rad]')
