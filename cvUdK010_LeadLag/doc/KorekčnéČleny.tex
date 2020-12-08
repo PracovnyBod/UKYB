@@ -1,0 +1,154 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[slovak]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\usepackage[left=3.0cm,
+			right=3.0cm,
+			top=2.0cm,
+			bottom=1.5cm,
+			]{geometry}
+\begin{document}
+
+\title{Korekčné členy}
+
+\author{Martin Dodek}
+\pagestyle{plain}
+\maketitle
+
+
+Riadený systém nech má tvar prenosovej funkcie:
+\begin{equation}
+\label{eq:riadený systém}
+F(s)=\frac{y(s)}{u(s)}=\frac{B(s)}{A(s)}
+\end{equation}
+
+Všeobecná prenosová funkcia korekčného člena má tvar:
+\begin{equation}
+ \label{eq:prenosová funkcia korekčného člena}
+ C(s)=\frac{u(s)}{e(s)}=\frac{aTs+1}{Ts+1}
+\end{equation}
+Kde $T$ je časová konštanta, $a$ je parameter určujúci výsledný dynamický charakter korekčného člena (oba parametre sú predmentom návrhu)
+
+\begin{itemize}
+	\item Korekčný člen s fázovým predstihom (Lead) $a>1$
+	\item Korekčný člen s fázovým zaostávaním (Lag) $a<1$
+\end{itemize}
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{blokova_schema}
+\caption{Bloková schéma URO s korekčným členom}
+\end{figure}
+
+
+
+\section{Frekvenčná prenosová funkcia}
+Frekvenčná prenosová funkcia korekčného člena potom nadobudne tvar (bez odvodenia)\footnote{Odvodenie si každý spraví sám}:
+\begin{equation}
+\label{eq:frekvenčná prenosová funkcia korekčného člena}
+ C(j\omega)=\frac{aTj\omega+1}{Tj\omega+1}=\frac{aT^2\omega^2+1}{T^2\omega^2+1}+\frac{T\omega(a-1)}{T^2\omega^2+1}j
+\end{equation}
+
+Pre fázový posun bude potom platiť:
+\begin{equation}
+\label{eq:frekvenčná prenosová funkcia fáza}
+ \arg(C(j\omega))=\arctan{\frac{T\omega(a-1)}{aT^2\omega^2+1}}
+\end{equation}
+
+\section{Návrh parametra $T$} 
+Pri návrhu uvažujeme posunutie frekvencie pôvodného amplitúdového priesečníka na novú hodnotu $\omega_m$.
+Hľadáme frekvenciu nového amplitúdového priesečníka, pri ktorej je nekorigovaná amplitúda rovná:
+\begin{equation}
+ -10\log(a)
+\end{equation}
+
+Táto frekvencia je zviazaná s parametrami korekčného člena a s jeho ``strednou frekvenciou'':
+\begin{equation}
+\omega_m=\frac{1}{T\sqrt{a}}
+\end{equation}
+
+Potom pre parameter $T$ bude platiť:
+\begin{equation}
+ T=\frac{1}{\omega_m\sqrt{a}}
+\end{equation}
+
+Tu predpokladáme, že parameter $a$ už bol navrhnutý.
+
+\section{Návrh parametra $a$} 
+Fázový posun pri frekvencii $\omega_m$ bude na základe rovnice \eqref{eq:frekvenčná prenosová funkcia fáza}.
+\begin{equation}
+ \phi_m=\arg(C(\omega_m))=\arctan{\frac{a-1}{2\sqrt{a}}}
+\end{equation}
+
+\begin{equation}
+ \sin(\phi_m)=\frac{\tan(\phi_m)}{\sqrt{\tan^2(\phi_m)+1}}
+\end{equation}
+
+\begin{equation}
+ \sin(\phi_m)=\frac{\frac{a-1}{2\sqrt{a}}}{\left({\frac{a-1}{2\sqrt{a}}}\right)^2+1}=\frac{a-1}{a+1}
+\end{equation}
+
+Po úprave získame vzťah pre parameter $a$
+\begin{equation}
+ a=\frac{1+\sin(\phi_m)}{1-\sin(\phi_m)}
+\end{equation}
+
+Potrebné fázové prevýšenie korekčného člena $\phi_m$ určíme ako rozdiel požadovanej fázovej bezpečnosti $\phi_z$ a fázovej rezervy riadeného systému $\phi_0$:
+\begin{equation}
+\phi_m=\phi_z-\phi_0
+\end{equation}
+
+
+
+\section{Návrh zosilnenia $K$} 
+Požadujme trvalú regulačnú odchýlku:
+\begin{equation}
+\epsilon=e(\infty)
+\end{equation}
+
+Zvyčajne v intervale $\left<0.001 \ldots 0.1 \right>$.
+
+Statické zosilnenie riadeného systému \eqref{eq:riadený systém} vieme určiť ako:
+\begin{equation}
+g_F=\frac{b_0}{a_0}
+\end{equation}
+
+Statické zosilnenie uzatvoreného regulačného obvodu bude:
+\begin{equation}
+ \frac{g_F K}{g_F K+1}
+\end{equation}
+
+Predpísaním trvalej regulačnej ochýlky požadujeme rovnosť:
+\begin{equation}
+1-\epsilon=\frac{K g_F}{K g_F+1}
+\end{equation} 
+
+Potom pre parameter zosilnenia $K$ korekčného člena musí platiť:
+\begin{equation}
+K=\frac{1-\epsilon}{\epsilon g_F}
+\end{equation}
+
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.75]{LeadBode}
+\caption{Frekvenčná charakteristika Lead korekčného člena}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.75]{LagBode}
+\caption{Frekvenčná charakteristika Lag korekčného člena}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.65]{OROBode}
+\caption{Frekvenčná charakteristika otvoreného regulačného obvodu, korekčného člena a riadeného systému}
+\end{figure}
+
+\end{document}
