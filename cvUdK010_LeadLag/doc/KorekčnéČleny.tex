@@ -129,7 +129,7 @@ g_F=\frac{b_0}{a_0}
 
 Statické zosilnenie uzatvoreného regulačného obvodu bude:
 \begin{equation}
- \frac{g_F K}{g_F K+1}
+ \frac{K g_F}{K g_F+1}
 \end{equation}
 
 Predpísaním trvalej regulačnej ochýlky požadujeme rovnosť:
@@ -155,14 +155,14 @@ K=\frac{1-\epsilon}{\epsilon g_F}
 Lead korekčný člen má charakter hornopriepustného filtra. Pri frekvencii $\omega_m$ dochádza ku kladnému a zároveň najväčšiemu fázovému posunu.
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.75\textwidth]{LeadBode}
+\includegraphics[width=0.77\textwidth]{LeadBode}
 \caption{Frekvenčná charakteristika Lead korekčného člena}
 \end{figure}
 
 Lag korekčný člen má charakter dolnopriepustného filtra. Pri frekvencii $\omega_m$ dochádza k zápornému a zároveň najväčšiemu fázovému posunu.
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.75\textwidth]{LagBode}
+\includegraphics[width=0.77\textwidth]{LagBode}
 \caption{Frekvenčná charakteristika Lag korekčného člena}
 \end{figure}
 
@@ -178,12 +178,12 @@ Navrhnite Lead korekčný člen s požadovanou fázovou bezpečnosťou $\phi_z=4
 
 Určíme statické zosilnenie systému na základe rovnice \eqref{eq:g_F} ako:
 \begin{equation}
-   g_F=\frac{50}{2}
+   g_F=\frac{50}{3}
 \end{equation}
 
 Na základe rovnice \eqref{eq:K} vypočítame zosilnenie $K$
 \begin{equation}
- K=1.1400
+ K=\frac{1-\epsilon}{\epsilon g_F}=1.1400
 \end{equation}
 
 Z frekvenčnej charakteristiky riadeného systému určíme fázovú rezervu:
@@ -200,7 +200,7 @@ Použitím rovnice \eqref{eq:phi_m} vypočítame potrebné fázové prevýšenie
 
 Z fázového prevýšenia teraz vieme určiť parameter $a$, ako je definované v rovnici \eqref{eq:a}.
 \begin{equation}
- a=13.9282
+ a=\frac{1+\sin(\phi_m)}{1-\sin(\phi_m)}=13.9282
 \end{equation} 
 
 Následne je potrebné odhadnúť frekvenciu nového amplitúdového priesečníka.
@@ -217,7 +217,7 @@ A teda:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\textwidth]{SystemBode}
+\includegraphics[width=0.9\textwidth]{SystemBode}
 \caption{Frekvenčná charakteristika riadeného systému}
 \end{figure}
 
@@ -226,18 +226,18 @@ A teda:
 Teraz už vieme navrhnúť aj parameter $T$, tak ako je definované v rovnici \eqref{eq:T}.
 
 \begin{equation}
- T=0.0391
+ T=\frac{1}{\omega_m\sqrt{a}}=0.0391
 \end{equation}  
 
-Výsledná prenosová funkcia korekčného člena potom bude:
+Výsledná prenosová funkcia korekčného člena \eqref{eq:prenosová funkcia korekčného člena} potom bude:
 
 \begin{equation}
- C(s)=1.14\:\frac{0.5448s+1}{0.03912s+1}
+ C(s)=\frac{aTs+1}{Ts+1}=1.14\:\frac{0.5448s+1}{0.03912s+1}
 \end{equation}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.95\textwidth]{OROBode}
+\includegraphics[width=1.0\textwidth]{OROBode}
 \caption{Frekvenčná charakteristika otvoreného regulačného obvodu, korekčného člena a riadeného systému}
 \end{figure}
 
