@@ -204,7 +204,12 @@ Z fázového prevýšenia teraz vieme určiť parameter $a$, ako je definované 
 \end{equation} 
 
 Následne je potrebné odhadnúť frekvenciu nového amplitúdového priesečníka.
-Na frekvenčnej charakteristike riadeného systému nájdeme frekvenciu, pri ktorej je apmlitúda rovná $-10\log(a)=$
+Na frekvenčnej charakteristike riadeného systému nájdeme frekvenciu, pri ktorej je apmlitúda rovná:
+ 
+\begin{equation}
+ -10\log(a)=-11.4390\: dB
+\end{equation}
+A teda:
 
 \begin{equation}
  \omega_m=6.85
@@ -212,7 +217,7 @@ Na frekvenčnej charakteristike riadeného systému nájdeme frekvenciu, pri kto
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=1.0\textwidth]{SystemBode}
+\includegraphics[width=0.95\textwidth]{SystemBode}
 \caption{Frekvenčná charakteristika riadeného systému}
 \end{figure}
 
@@ -227,12 +232,12 @@ Teraz už vieme navrhnúť aj parameter $T$, tak ako je definované v rovnici \e
 Výsledná prenosová funkcia korekčného člena potom bude:
 
 \begin{equation}
- C(s)=1.14\frac{0.5448s+1}{0.03912s+1}
+ C(s)=1.14\:\frac{0.5448s+1}{0.03912s+1}
 \end{equation}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=1.0\textwidth]{OROBode}
+\includegraphics[width=0.95\textwidth]{OROBode}
 \caption{Frekvenčná charakteristika otvoreného regulačného obvodu, korekčného člena a riadeného systému}
 \end{figure}
 

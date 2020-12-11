@@ -1,4 +1,4 @@
-
+clear
 close all
 Tsim=20;
 Ts=0.1;
@@ -21,7 +21,7 @@ phi_0= deg2rad(-15);
 phi_m=phi_z-phi_0;
 a=(1+sin(phi_m))/(1-sin(phi_m));
 
-d=-10*log10(a);
+-10*log10(a)
 omega_m=6.85;
 T=1/(omega_m*sqrt(a));
 
